@@ -1,0 +1,6 @@
+worker/
+wrangler.jsonc
+.wrangler/
+README-FOR-JARED.md
+node_modules/
+__pycache__/

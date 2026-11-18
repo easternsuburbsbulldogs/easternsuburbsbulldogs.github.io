@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+  ==========  HOW TO ADD A NEWS POST  ==========
+  1. Copy this file and rename it, e.g.  news/new-coach-announced.html  (lowercase, hyphens, no spaces).
+  2. Replace every CAPITALISED placeholder below. Leave everything else as it is.
+  3. Put the photo in  news/images/  and update the two image paths (og:image and the <img> under the headline).
+  4. Pill colour: change class="pill gold" to  pill  (red),  pill gold  or  pill navy.
+  5. Run  python tools/news_index.py public  so the post appears on the News page.
+  6. Optional: to feature it on the home page, copy an existing <article class="ncard"> in index.html,
+     set its data-date="YYYY-MM-DD", and point its Read more link at  news/your-file-name.html
+  7. Commit the files to the main branch. The site updates in about a minute.
+  ==============================================
+-->
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEADLINE GOES HERE | UNSW-ES Bulldogs</title>
+<meta name="description" content="ONE-SENTENCE SUMMARY FOR SEARCH AND SOCIAL PREVIEWS.">
+<meta property="og:title" content="HEADLINE GOES HERE">
+<meta property="og:description" content="ONE-SENTENCE SUMMARY FOR SEARCH AND SOCIAL PREVIEWS.">
+<meta property="og:image" content="https://easternsuburbsbulldogs.github.io/news/images/YOUR-IMAGE.jpg">
+<link rel="icon" href="../app-icon.png">
+<link rel="stylesheet" href="../site.css">
+<!-- seo -->
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://easternsuburbsbulldogs.github.io/news/YOUR-FILE-NAME">
+<meta property="og:url" content="https://easternsuburbsbulldogs.github.io/news/YOUR-FILE-NAME">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="UNSW-ES Bulldogs">
+<meta property="og:locale" content="en_AU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#18296A">
+<link rel="apple-touch-icon" href="../app-icon.png">
+<script src="../site.js"></script>
+<!-- /seo -->
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <img class="crestimg" src="../crest.png" width="304" height="199" alt="UNSW-ES Bulldogs crest">
+      <span><b>UNSW-ES Bulldogs</b><span>Australian Football Club</span></span>
+    </a>
+    <nav class="links">
+      <div class="dd"><button class="ddb" aria-haspopup="true">About <span class="car" aria-hidden="true"></span></button><div class="ddm"><a href="../about/our-story.html">Our Story &amp; History</a><a href="../about/honour-board.html">Honour Board</a><a href="../about/afl-players.html">AFL &amp; AFLW Players</a><a href="../about/partners.html">Partners</a><a href="../about/rules.html">Rules &amp; Regulations</a></div></div>
+      <div class="dd"><button class="ddb" aria-haspopup="true">Football <span class="car" aria-hidden="true"></span></button><div class="ddm"><a href="../football/mens.html">Men's Football</a><a href="../football/womens.html">Women's Football</a><a href="../football/youth-juniors.html">Youth &amp; Juniors</a><a href="../football/insurance.html">Insurance</a><a href="../index.html#coaches">Coaches</a></div></div>
+      <a href="../index.html#train">Train</a>
+      <a href="../index.html#news">News</a>
+      <a href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/shop" target="_blank" rel="noopener">Shop</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="navcta" href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/register">Register 2027</a>
+    </nav>
+    <button class="burger" onclick="var m=document.getElementById('mnav');m.style.display=m.style.display==='block'?'none':'block'" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mnav">
+    <div class="wrap">
+      <div class="mh">About</div><a class="sub" href="../about/our-story.html">Our Story &amp; History</a><a class="sub" href="../about/honour-board.html">Honour Board</a><a class="sub" href="../about/afl-players.html">AFL &amp; AFLW Players</a><a class="sub" href="../about/partners.html">Partners</a><a class="sub" href="../about/rules.html">Rules &amp; Regulations</a>
+      <div class="mh">Football</div><a class="sub" href="../football/mens.html">Men's Football</a><a class="sub" href="../football/womens.html">Women's Football</a><a class="sub" href="../football/youth-juniors.html">Youth &amp; Juniors</a><a class="sub" href="../football/insurance.html">Insurance</a><a class="sub" href="../index.html#coaches">Coaches</a>
+      <div class="mh">Club</div>
+      <a href="../index.html#train">Train</a>
+      <a href="../index.html#news">News</a>
+      <a href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/shop" target="_blank" rel="noopener">Shop</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="navcta" href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/register">Register 2027</a>
+    </div>
+  </div>
+</header>
+<main class="art">
+  <a class="back" href="../index.html#news">← All news</a>
+  <div class="meta"><span class="pill gold">Club news</span><span class="date">DAY MONTH YEAR</span></div>
+  <h1>HEADLINE GOES HERE</h1>
+  <p class="lede">ONE OR TWO SENTENCES THAT SUM UP THE STORY.</p>
+  <div class="himg"><img src="../news/images/YOUR-IMAGE.jpg" alt="DESCRIBE THE PHOTO" loading="lazy" decoding="async"></div>
+  <div class="body">
+    <p>FIRST PARAGRAPH.</p>
+    <p>SECOND PARAGRAPH.</p>
+    <h2>OPTIONAL SUB-HEADING</h2>
+    <p>MORE TEXT.</p>
+  </div>
+  <div class="src">Source or photo credit (optional).</div>
+  <div class="more-news"><h3>More from the kennel</h3><div class="mn"><a href="sfl-foundation-club.html"><img src="../news-sfl.jpg" alt="" loading="lazy" decoding="async"><span>Bulldogs named a Sydney Football League foundation club</span></a><a href="dane-rampe-retires.html"><img src="../news-rampe.jpg" alt="" loading="lazy" decoding="async"><span>From our colours to 289 games: Dane Rampe retires</span></a></div></div>
+</main>
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="color:#fff"><img class="crestimg" src="../crest.png" width="304" height="199" alt="UNSW-ES Bulldogs crest" loading="lazy" decoding="async"><span><b style="font-family:Oswald;text-transform:uppercase">UNSW-ES Bulldogs</b><span style="display:block;color:var(--gold2);font-size:10.5px;letter-spacing:.14em">Australian Football Club</span></span></div>
+      <p class="ack">We acknowledge the Bidjigal and Gadigal people, the Traditional Custodians of the land on which we train and play. © 2027 UNSW-ES Bulldogs AFC · ABN 40 573 388 043</p>
+    </div>
+    <div style="text-align:right">
+      <a href="../about/our-story.html">About</a> · <a href="../football/mens.html">Football</a> · <a href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/register">Register</a> · <a href="https://www.playhq.com/afl/org/unsw-eastern-suburbs-bulldogs/5a7bb76d/shop" target="_blank" rel="noopener">Shop</a> · <a href="../index.html#contact">Contact</a><br>
+      <span class="fsoc"><a href="https://instagram.com/unswesafl" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.2 1 .5 1.4 1 .5.4.8.8 1 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c0 1.2-.2 1.8-.4 2.2-.2.6-.5 1-1 1.4-.4.5-.8.8-1.4 1-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2 0-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-1-.5-.4-.8-.8-1-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c0-1.2.2-1.8.4-2.2.2-.6.5-1 1-1.4.4-.5.8-.8 1.4-1 .4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-1.1.05-1.7.24-2.1.4-.5.2-.9.44-1.3.84-.4.4-.64.8-.84 1.3-.16.4-.35 1-.4 2.1C2.6 9.5 2.6 9.9 2.6 12s0 2.5.07 3.7c.05 1.1.24 1.7.4 2.1.2.5.44.9.84 1.3.4.4.8.64 1.3.84.4.16 1 .35 2.1.4 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c1.1-.05 1.7-.24 2.1-.4.5-.2.9-.44 1.3-.84.4-.4.64-.8.84-1.3.16-.4.35-1 .4-2.1.07-1.2.07-1.6.07-3.7s0-2.5-.07-3.7c-.05-1.1-.24-1.7-.4-2.1-.2-.5-.44-.9-.84-1.3-.4-.4-.8-.64-1.3-.84-.4-.16-1-.35-2.1-.4C15.5 4 15.1 4 12 4zm0 3.1a4.9 4.9 0 110 9.8 4.9 4.9 0 010-9.8zm0 8.1a3.2 3.2 0 100-6.4 3.2 3.2 0 000 6.4zm6.2-8.3a1.15 1.15 0 11-2.3 0 1.15 1.15 0 012.3 0z"/></svg></a><a href="https://facebook.com/unswesbulldogsafc" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0022 12z"/></svg></a><a href="https://www.tiktok.com/@unswesafl" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.77.12V9.77a5.7 5.7 0 0 0-.77-.05 5.68 5.68 0 1 0 5.68 5.68V9.04a7.33 7.33 0 0 0 4.28 1.37V7.32a4.28 4.28 0 0 1-3.22-1.5z"/></svg></a><span class="fhandle">@unswesafl</span></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

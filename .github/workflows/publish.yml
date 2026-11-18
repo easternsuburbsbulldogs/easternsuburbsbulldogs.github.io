@@ -1,0 +1,48 @@
+# Publishes the website to GitHub Pages.
+# Runs on every change pushed to main, every hour (to bring in new Play AFL news), and on demand
+# from the Actions tab ("Run workflow").
+name: Publish website
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Bring in Play AFL news about the club
+        run: node tools/fetch-playafl-news.mjs public/news.json
+
+      - name: Leave out files that are not part of the public site
+        run: rm -f public/news/_template.html public/_headers public/.assetsignore
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
