@@ -36,7 +36,7 @@ Small text changes can be made right on github.com: open the file, click the pen
 | Add a coach photo | Put a square photo in `public/coaches/`, add it to `tools/optimize_images.py`, run `python tools/optimize_images.py public`, and point to the `.webp` in `tools/teams_section.py` |
 | Change training times or grounds | `tools/train_section.py`, then run `python tools/train_section.py public` |
 | Re-order AFL / AFLW players | `tools/players_rows.py` (`ORDER` list), then run `python tools/players_rows.py public` |
-| Colour palette | `public/site.js`, top: `ROTATE` (a different palette each day), `DEFAULT_THEME` (used when `ROTATE` is false), `SHOW_SWITCHER` (the picker in the menu) |
+| Colour palette | `public/site.js`, top: `ROTATE` (a different palette each day), `NIGHT_THEMES` and `NIGHT_FROM`/`NIGHT_UNTIL` (darker palettes from 7pm to 6am), `DEFAULT_THEME`, `SHOW_SWITCHER` (the picker in the menu) |
 | Tune how Play AFL news mixes with ours | `public/site.js`: the `NEWS` settings |
 
 After running any of the `tools/` scripts, commit the changed files in `public/` and the site updates.

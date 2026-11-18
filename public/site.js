@@ -4,6 +4,8 @@
 (function () {
   var ROTATE = true;                 // a different palette each day; set to false to always use DEFAULT_THEME
   var DEFAULT_THEME = 'tricolour';   // used when ROTATE is false
+  var NIGHT_THEMES = ['lights', 'heritage', 'original', 'tricolour']; // dark palettes used after dark, one per night; [] turns it off
+  var NIGHT_FROM = 19, NIGHT_UNTIL = 6; // 7pm to 6am, visitor's local time
   var SHOW_SWITCHER = true;          // the palette picker in the menu; set to false to hide it
   var THEMES = [
     { id: 'tricolour', name: 'Tricolour',     sw: ['#18296A', '#C8102E', '#FFFFFF'] },
@@ -30,7 +32,11 @@
   var now = new Date();
   var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
   var dayNumber = Math.floor((now.getTime() - now.getTimezoneOffset() * 60000) / 864e5);
-  var todays = ROTATE ? THEMES[dayNumber % THEMES.length].id : DEFAULT_THEME;
+  var daytime = ROTATE ? THEMES[dayNumber % THEMES.length].id : DEFAULT_THEME;
+  function isNight(d) { var h = d.getHours(); return h >= NIGHT_FROM || h < NIGHT_UNTIL; }
+  var nightly = NIGHT_THEMES.length ? NIGHT_THEMES[dayNumber % NIGHT_THEMES.length] : '';
+  if (nightly === daytime && NIGHT_THEMES.length > 1) nightly = NIGHT_THEMES[(dayNumber + 1) % NIGHT_THEMES.length]; // always a visible change at 7pm
+  var todays = nightly && isNight(now) ? nightly : daytime;
 
   // A visitor's own pick (from the menu, or a link ending in ?palette=lights) lasts for the rest of the day.
   function picked() {
@@ -42,6 +48,12 @@
   if (fromLink && find(fromLink)) pick(fromLink);
   // Runs in <head>, before the page paints, so there is no flash of the wrong colours.
   var current = apply((SHOW_SWITCHER && picked()) || todays);
+
+  // If the page is left open across 7pm (or 6am), switch over without a reload, unless the visitor picked one.
+  if (nightly) setInterval(function () {
+    var want = isNight(new Date()) ? nightly : daytime;
+    if (!(SHOW_SWITCHER && picked()) && want !== current) { current = apply(want); if (window.__palPaint) window.__palPaint(); }
+  }, 60000);
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -67,7 +79,7 @@
         b.type = 'button';
         b.setAttribute('data-id', t.id);
         b.appendChild(swatch(t));
-        b.appendChild(el('span', '', t.name + (t.id === todays ? ' · today' : '')));
+        b.appendChild(el('span', '', t.name + (t.id === daytime ? ' · today' : '') + (t.id === nightly && nightly !== daytime ? ' · tonight' : '')));
         b.addEventListener('click', function () { current = apply(t.id); pick(t.id); paint(); });
         box.appendChild(b);
       });
@@ -83,6 +95,7 @@
       });
       if (btn) { var old = btn.querySelector('.tb-sw'); btn.replaceChild(swatch(find(current)), old); }
     }
+    window.__palPaint = paint;
 
     var links = document.querySelector('nav.links'), cta = links && links.querySelector('.navcta');
     if (links) {
@@ -96,7 +109,7 @@
       var menu = el('div', 'ddm pal-menu');
       menu.appendChild(el('div', 'pal-h', 'Colour palette'));
       menu.appendChild(options('pal-list'));
-      menu.appendChild(el('p', 'pal-note', 'Changes every day. Your pick lasts until tomorrow.'));
+      menu.appendChild(el('p', 'pal-note', 'Changes every day, with a darker palette from 7pm. Your pick lasts until tomorrow.'));
       dd.appendChild(btn); dd.appendChild(menu);
       links.insertBefore(dd, cta || null);
     }
