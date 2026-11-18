@@ -33,7 +33,7 @@ Small text changes can be made right on github.com: open the file, click the pen
 | Change wording on a page | The page's file in `public/` (for example `public/about/rules.html`) |
 | Add a news post | Copy `public/news/_template.html`, follow the notes at its top, then run `python tools/news_index.py public` |
 | Change a coach, assistant or team detail | `tools/teams_section.py` (lists at the top), then run `python tools/teams_section.py public` |
-| Add a coach photo | Put a square photo in `public/coaches/` and point to it in `tools/teams_section.py` |
+| Add a coach photo | Put a square photo in `public/coaches/`, add it to `tools/optimize_images.py`, run `python tools/optimize_images.py public`, and point to the `.webp` in `tools/teams_section.py` |
 | Change training times or grounds | `tools/train_section.py`, then run `python tools/train_section.py public` |
 | Re-order AFL / AFLW players | `tools/players_rows.py` (`ORDER` list), then run `python tools/players_rows.py public` |
 | Colour palette | `public/site.js`, top: `ROTATE` (a different palette each day), `DEFAULT_THEME` (used when `ROTATE` is false), `SHOW_SWITCHER` (the picker in the menu) |
@@ -44,7 +44,7 @@ After running any of the `tools/` scripts, commit the changed files in `public/`
 ## Play AFL news
 
 Every hour GitHub Actions runs `tools/fetch-playafl-news.mjs`, which reads the AFL Sydney / SFL news feed,
-keeps stories that mention the club, and publishes them as `news.json`. The home page and the News page
+keeps stories that mention the club, shrinks each story's picture to a small WebP copy on our own site (`tools/playafl_images.py`), and publishes them as `news.json`. The home page and the News page
 blend these in with the club's own articles. Club articles always take priority, and a Play AFL story that
 we have written up ourselves never shows twice. If Play AFL is down, the site simply shows the club's own
 articles. You can see each run under the **Actions** tab, and start one by hand with **Run workflow**.

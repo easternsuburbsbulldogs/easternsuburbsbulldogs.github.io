@@ -7,24 +7,24 @@ from urllib.parse import quote
 
 pub = pathlib.Path(sys.argv[1])
 PRES = 'president@unswesbulldogs.com.au'
-WILLO = 'https://play.afl/sites/default/files/2026-11/Tom%20Williamson_0.jpg'
+WILLO = 'coaches/tom-williamson.webp'
 
 # Assistant coaches: team -> list of (name, role, photo path in public/ or None, email or None).
-# Example: "Men's Premier": [('Sam Example', 'Midfield coach', 'coaches/sam-example.jpg', None)],
+# Example: "Men's Premier": [('Sam Example', 'Midfield coach', 'coaches/sam-example.webp', None)],
 ASSISTANTS = {
-    "Men's Premier": [('Jake Brown', 'Assistant coach', 'coaches/jake-brown.jpg', None), ('Kieran Emery', 'Assistant coach', 'coaches/kieran-emery.jpg', None)],
-    "Men's Division 1": [('Jared Anderson', 'Assistant coach', 'coaches/jared-anderson.jpg', None)],
+    "Men's Premier": [('Jake Brown', 'Assistant coach', 'coaches/jake-brown.webp', None), ('Kieran Emery', 'Assistant coach', 'coaches/kieran-emery.webp', None)],
+    "Men's Division 1": [('Jared Anderson', 'Assistant coach', 'coaches/jared-anderson.webp', None)],
 }
 
 # Director of Coaching: shown above the SFL teams on the home page and on the Men's and Women's pages.
 DIRECTOR = ("Ryan O'Keefe", 'Director of Coaching · SFL program',
             "Two-time Swans premiership player and 2012 Norm Smith Medallist. Oversees coaching across our SFL teams.",
-            'https://play.afl/sites/default/files/2026-10/Ryan%20O%27Keefe%20appointment.png', 'news/ryan-okeefe-director-of-coaching.html')
+            'coaches/ryan-okeefe.webp', 'news/ryan-okeefe-director-of-coaching.html')
 
 
 def director_strip(prefix=''):
     name, role, blurb, photo, link = DIRECTOR
-    return (f'<div class="dirstrip"><span class="ds-av"><img src="{photo}" alt="{name}" loading="lazy" decoding="async"></span>'
+    return (f'<div class="dirstrip"><span class="ds-av"><img src="{prefix}{photo}" alt="{name}" loading="lazy" decoding="async"></span>'
             f'<span class="ds-who"><small>{role}</small><b>{name}</b><span>{blurb}</span></span>'
             f'<a class="ds-link" href="{prefix}{link}">Read more →</a></div>')
 
@@ -32,16 +32,16 @@ def director_strip(prefix=''):
 GROUPS = [
     ('SFL', 'SFL · Sydney Football League', 'Home games at Henson Park, Marrickville', [
         # team, page, note, women?, coach, coach role, photo, coach email
-        ("Men's Premier", 'football/mens.html', 'Flagship side', False, 'Jordan “Jordy” Doering', 'Head Coach', 'jordan.jpg', None),
+        ("Men's Premier", 'football/mens.html', 'Flagship side', False, 'Jordan “Jordy” Doering', 'Head Coach', 'jordan.webp', None),
         ("Women's Premier", 'football/womens.html', 'Flagship side', True, 'Tom “Willo” Williamson', 'Head Coach', WILLO, None),
-        ("Men's Under 19.5", 'football/youth-juniors.html', 'Pathway to seniors', False, 'Steven Chichester', 'Head Coach', 'coaches/steven-chichester.jpg', None),
-        ("Women's Under 20", 'football/youth-juniors.html', '2026 premiers', True, 'Jamie Grant', 'Head Coach', 'coaches/jamie-grant.jpg', None),
+        ("Men's Under 19.5", 'football/youth-juniors.html', 'Pathway to seniors', False, 'Steven Chichester', 'Head Coach', 'coaches/steven-chichester.webp', None),
+        ("Women's Under 20", 'football/youth-juniors.html', '2026 premiers', True, 'Jamie Grant', 'Head Coach', 'coaches/jamie-grant.webp', None),
     ]),
     ('Divisional', 'AFL Sydney Divisions', 'Home games at David Phillips South, except Division 1 (Henson Park) and some Division 3 games', [
-        ("Men's Division 1", 'football/mens.html', 'Reserves · plays at Henson Park', False, 'Paul “Lovey” Love', 'Coach', 'coaches/paul-love.jpg', None),
-        ("Men's Division 3", 'football/mens.html', '2026 premiers · plays at both grounds', False, 'Alexander “Dawsey” Dawes', 'Coach', 'coaches/alex-dawes.jpg', None),
+        ("Men's Division 1", 'football/mens.html', 'Reserves · plays at Henson Park', False, 'Paul “Lovey” Love', 'Coach', 'coaches/paul-love.webp', None),
+        ("Men's Division 3", 'football/mens.html', '2026 premiers · plays at both grounds', False, 'Alexander “Dawsey” Dawes', 'Coach', 'coaches/alex-dawes.webp', None),
         ("Men's Division 5", 'football/mens.html', 'Beginners welcome', False, None, None, None, None),
-        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, 'Harry Dunstan', 'Coach', 'coaches/harry-dunstan.jpg', None),
+        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, 'Harry Dunstan', 'Coach', 'coaches/harry-dunstan.webp', None),
     ]),
 ]
 

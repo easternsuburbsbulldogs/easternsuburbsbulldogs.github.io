@@ -1042,3 +1042,10 @@
   [data-theme="guernsey"] .pal-h{color:var(--kick)}
   [data-theme="guernsey"] .pal-note{color:#5A6682}
   [data-theme="guernsey"] .pal-mobile .pal-o{border-color:#E3E6EE}
+  .ds-av img{object-position:center 30%}
+  /* switch to the menu button before the header gets crowded */
+  @media(max-width:1080px){
+    nav.links{display:none}
+    .burger{display:flex;width:44px;height:44px;align-items:center;justify-content:center;margin-right:-8px}
+  }
+  .brand b,.navcta{white-space:nowrap}

@@ -24,7 +24,7 @@ PRE = f'''        <div class="tp-block">
           <h3>Mondays, 6:00-8:00pm</h3>
           <p>Everyone trains together. Walk-ins welcome, no registration needed. Bring boots and runners.</p>
         </div>
-        <div class="tp-maps one">{tile('Robertson Road Fields', 'Centennial Park', 'pre-season', 'map-preseason.jpg', CP)}</div>'''
+        <div class="tp-maps one">{tile('Robertson Road Fields', 'Centennial Park', 'pre-season', 'map-preseason.webp', CP)}</div>'''
 
 SEASON = f'''        <div class="tp-block">
           <h3>Training</h3>
@@ -42,7 +42,7 @@ SEASON = f'''        <div class="tp-block">
           </dl>
           <a class="tp-prev" href="https://www.playhq.com/afl/org/afl-sydney/2026/85fe4ed2" target="_blank" rel="noopener">2027 times aren't out yet. Last season's fixture gives a rough idea ↗</a>
         </div>
-        <div class="tp-maps">{tile('David Phillips South', 'Daceyville', 'training and game day', 'map-inseason.jpg', DPS)}{tile('Henson Park', 'Marrickville', 'game day', 'map-gameday.jpg', HP)}</div>'''
+        <div class="tp-maps">{tile('David Phillips South', 'Daceyville', 'training and game day', 'map-inseason.webp', DPS)}{tile('Henson Park', 'Marrickville', 'game day', 'map-gameday.webp', HP)}</div>'''
 
 SECTION = f'''<!-- TRAIN (built by tools/train_section.py) -->
 <section id="train" class="alt">

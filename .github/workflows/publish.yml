@@ -35,6 +35,15 @@ jobs:
       - name: Bring in Play AFL news about the club
         run: node tools/fetch-playafl-news.mjs public/news.json
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Shrink Play AFL images to small WebP copies hosted on our site
+        run: |
+          pip install --quiet pillow
+          python tools/playafl_images.py public/news.json public/playafl
+
       - name: Leave out files that are not part of the public site
         run: rm -f public/news/_template.html public/_headers public/.assetsignore
 
