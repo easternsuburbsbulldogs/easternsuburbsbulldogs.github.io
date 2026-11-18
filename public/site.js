@@ -1,10 +1,10 @@
 /* UNSW-ES Bulldogs: shared behaviour for every page.
-   1. Colour palette (and the preview switcher bar)
-   2. Mobile menu state for screen readers
-   3. Keyboard access for the player cards */
+   1. Colour palette: rotates daily, with a picker in the menu
+   2. News blend, mobile menu state, keyboard access for the player cards */
 (function () {
-  var DEFAULT_THEME = 'tricolour';   // the palette visitors get
-  var SHOW_SWITCHER = true;          // set to false once the club has picked a palette
+  var ROTATE = true;                 // a different palette each day; set to false to always use DEFAULT_THEME
+  var DEFAULT_THEME = 'tricolour';   // used when ROTATE is false
+  var SHOW_SWITCHER = true;          // the palette picker in the menu; set to false to hide it
   var THEMES = [
     { id: 'tricolour', name: 'Tricolour',     sw: ['#18296A', '#C8102E', '#FFFFFF'] },
     { id: 'guernsey',  name: 'Home Guernsey', sw: ['#FFFFFF', '#C8102E', '#23519E'], bar: '#FFFFFF' },
@@ -26,11 +26,22 @@
     return t.id;
   }
 
-  // Runs in <head>, before the page paints, so there is no flash of the wrong colours.
-  // A link ending in ?palette=guernsey (or lights, heritage, original, tricolour) opens the site in that palette.
+  // Today's palette: everyone sees the same one on the same day, and it moves on at midnight.
+  var now = new Date();
+  var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+  var dayNumber = Math.floor((now.getTime() - now.getTimezoneOffset() * 60000) / 864e5);
+  var todays = ROTATE ? THEMES[dayNumber % THEMES.length].id : DEFAULT_THEME;
+
+  // A visitor's own pick (from the menu, or a link ending in ?palette=lights) lasts for the rest of the day.
+  function picked() {
+    var v = (store(KEY) || '').split('|');
+    return v[1] === today && find(v[0]) ? v[0] : null;
+  }
+  function pick(id) { store(KEY, id + '|' + today); }
   var fromLink = (location.search.match(/[?&]palette=([a-z]+)/) || [])[1];
-  if (fromLink && find(fromLink)) store(KEY, fromLink);
-  var current = apply(SHOW_SWITCHER ? (store(KEY) || DEFAULT_THEME) : DEFAULT_THEME);
+  if (fromLink && find(fromLink)) pick(fromLink);
+  // Runs in <head>, before the page paints, so there is no flash of the wrong colours.
+  var current = apply((SHOW_SWITCHER && picked()) || todays);
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -44,51 +55,57 @@
     return s;
   }
 
+  // Palette picker: a "Colours" dropdown in the desktop menu and a section in the mobile menu.
   function buildSwitcher() {
-    var bar = el('div', 'themebar');
-    bar.setAttribute('role', 'group');
-    bar.setAttribute('aria-label', 'Preview a colour palette');
-    var label = el('div', 'tb-l', 'Colour palette');
-    label.appendChild(el('small', '', 'Tap one to preview'));
-    var opts = el('div', 'tb-opts');
-    var fab = el('button', 'themefab');
-    fab.type = 'button';
-
-    function paint() {
-      [].forEach.call(opts.children, function (b) {
-        b.setAttribute('aria-pressed', String(b.getAttribute('data-id') === current));
+    var groups = [];
+    function options(cls) {
+      var box = el('div', cls);
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-label', 'Colour palette');
+      THEMES.forEach(function (t) {
+        var b = el('button', 'pal-o');
+        b.type = 'button';
+        b.setAttribute('data-id', t.id);
+        b.appendChild(swatch(t));
+        b.appendChild(el('span', '', t.name + (t.id === todays ? ' · today' : '')));
+        b.addEventListener('click', function () { current = apply(t.id); pick(t.id); paint(); });
+        box.appendChild(b);
       });
-      fab.textContent = '';
-      fab.appendChild(swatch(find(current)));
-      fab.appendChild(document.createTextNode('Colours'));
+      groups.push(box);
+      return box;
     }
-    THEMES.forEach(function (t) {
-      var b = el('button', 'tb-o');
-      b.type = 'button';
-      b.setAttribute('data-id', t.id);
-      b.appendChild(swatch(t));
-      b.appendChild(el('span', '', t.name));
-      b.addEventListener('click', function () { current = apply(t.id); store(KEY, current); paint(); });
-      opts.appendChild(b);
-    });
-    var close = el('button', 'tb-x', '×');
-    close.type = 'button';
-    close.setAttribute('aria-label', 'Hide the palette bar');
-
-    function show(open) {
-      bar.style.display = open ? '' : 'none';
-      fab.style.display = open ? 'none' : '';
-      document.body.classList.toggle('has-themebar', open);
-      document.body.classList.toggle('has-themefab', !open);
-      store(KEY + '-bar', open ? 'open' : 'closed');
+    var btn;
+    function paint() {
+      groups.forEach(function (g) {
+        [].forEach.call(g.children, function (b) {
+          if (b.hasAttribute('data-id')) b.setAttribute('aria-pressed', String(b.getAttribute('data-id') === current));
+        });
+      });
+      if (btn) { var old = btn.querySelector('.tb-sw'); btn.replaceChild(swatch(find(current)), old); }
     }
-    close.addEventListener('click', function () { show(false); fab.focus(); });
-    fab.addEventListener('click', function () { show(true); });
 
-    bar.appendChild(label); bar.appendChild(opts); bar.appendChild(close);
-    document.body.appendChild(bar); document.body.appendChild(fab);
+    var links = document.querySelector('nav.links'), cta = links && links.querySelector('.navcta');
+    if (links) {
+      var dd = el('div', 'dd pal-dd');
+      btn = el('button', 'ddb pal-btn');
+      btn.type = 'button';
+      btn.setAttribute('aria-haspopup', 'true');
+      btn.setAttribute('aria-label', 'Colour palette');
+      btn.appendChild(el('span', 'tb-sw'));
+      var car = el('span', 'car'); car.setAttribute('aria-hidden', 'true'); btn.appendChild(car);
+      var menu = el('div', 'ddm pal-menu');
+      menu.appendChild(el('div', 'pal-h', 'Colour palette'));
+      menu.appendChild(options('pal-list'));
+      menu.appendChild(el('p', 'pal-note', 'Changes every day. Your pick lasts until tomorrow.'));
+      dd.appendChild(btn); dd.appendChild(menu);
+      links.insertBefore(dd, cta || null);
+    }
+    var mwrap = document.querySelector('#mnav .wrap'), mcta = mwrap && mwrap.querySelector('.navcta');
+    if (mwrap) {
+      mwrap.insertBefore(el('div', 'mh', 'Colour palette'), mcta || null);
+      mwrap.insertBefore(options('pal-list pal-mobile'), mcta || null);
+    }
     paint();
-    show(store(KEY + '-bar') !== 'closed');
   }
 
   /* NEWS: blend in Play AFL articles about the club.
