@@ -127,7 +127,7 @@ DETAILS = {
                          SFL_TRAIN, HENSON, "Coached the Under 20s to the 2026 premiership."),
     "Men's Division 1": ("Our reserves side and the next step up to the Premier team.",
                          "Strong senior football. Players here are pushing for Premier selection.",
-                         DIV_TRAIN, HENSON, "Coached Division 3 to premierships in 2026 and 2024 (2024 alongside Josh Tighe)."),
+                         SFL_TRAIN + " (with the SFL men)", HENSON, "Coached Division 3 to premierships in 2026 and 2024 (2024 alongside Josh Tighe)."),
     "Men's Division 3": ("2026 premiers. Senior football for players who want a real contest.",
                          "Mid-level senior football in the AFL Sydney Divisions.",
                          DIV_TRAIN, 'Split between ' + HENSON + ' and ' + DPS, None),
