@@ -39,9 +39,9 @@ GROUPS = [
     ]),
     ('Divisional', 'AFL Sydney Divisions', 'Home games at David Phillips South, except Division 1 (Henson Park) and some Division 3 games', [
         ("Men's Division 1", 'football/mens.html', 'Reserves · plays at Henson Park', False, 'Paul “Lovey” Love', 'Coach', 'coaches/paul-love.webp', None),
+        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, 'Harry Dunstan', 'Coach', 'coaches/harry-dunstan.webp', None),
         ("Men's Division 3", 'football/mens.html', '2026 premiers · plays at both grounds', False, 'Alexander “Dawsey” Dawes', 'Coach', 'coaches/alex-dawes.webp', None),
         ("Men's Division 5", 'football/mens.html', 'Beginners welcome', False, None, None, None, None),
-        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, 'Harry Dunstan', 'Coach', 'coaches/harry-dunstan.webp', None),
     ]),
 ]
 
