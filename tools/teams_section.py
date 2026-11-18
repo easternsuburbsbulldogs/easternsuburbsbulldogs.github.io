@@ -41,7 +41,7 @@ GROUPS = [
         ("Men's Division 1", 'football/mens.html', 'Reserves · plays at Henson Park', False, 'Paul “Lovey” Love', 'Coach', 'coaches/paul-love.jpg', None),
         ("Men's Division 3", 'football/mens.html', '2026 premiers · plays at both grounds', False, 'Alexander “Dawsey” Dawes', 'Coach', 'coaches/alex-dawes.jpg', None),
         ("Men's Division 5", 'football/mens.html', 'Beginners welcome', False, None, None, None, None),
-        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, None, None, None, None),
+        ("Women's Division 2", 'football/womens.html', 'Beginners welcome', True, 'Harry Dunstan', 'Coach', 'coaches/harry-dunstan.jpg', None),
     ]),
 ]
 
