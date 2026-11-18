@@ -63,6 +63,8 @@ pages = []
 for f in sorted(pub.rglob('*.html')):
     rel = f.relative_to(pub).as_posix()
     s = f.read_text(encoding='utf-8')
+    if 'forwarding page (tools/redirects.py)' in s:
+        continue  # old Wix addresses: leave them as plain forwards, keep them out of the sitemap
     depth = rel.count('/')
     is_404, is_tpl = rel == '404.html', rel.endswith('_template.html')
     prefix = '/' if is_404 else '../' * depth

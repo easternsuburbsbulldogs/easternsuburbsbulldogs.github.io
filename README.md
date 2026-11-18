@@ -56,8 +56,8 @@ articles. You can see each run under the **Actions** tab, and start one by hand 
    is offered.
 2. Point the search tags at the real address and switch off preview mode:
    `python tools/seo.py public https://www.unswesbulldogs.com.au` (without the word `preview`), then commit.
-3. Before cancelling Wix, list the old Wix page addresses and add a small forwarding page for each, so
-   their Google ranking carries over to the new pages.
+3. Old Wix page addresses (like /afl-players-2) forward to the new pages through small pages made by
+   `python tools/redirects.py public https://www.unswesbulldogs.com.au`. Edit the list in that file if needed.
 
 ## What's where
 
