@@ -4,7 +4,7 @@ The club's public website. Everything lives in this one GitHub organisation (`ea
 the files, the hosting (GitHub Pages) and the hourly news update (GitHub Actions). There is no other
 account, server or database to look after.
 
-- **Live preview:** https://easternsuburbsbulldogs.github.io
+- **Live preview:** https://easternsuburbsbulldogs.github.io https://www.unswesbulldogs.com.au/
 - **Publishing:** any change saved to the `main` branch goes live in about a minute.
 - **Cost:** free.
 
