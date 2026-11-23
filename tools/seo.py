@@ -79,7 +79,7 @@ for f in sorted(pub.rglob('*.html')):
     head = re.sub(r'\n?<!-- seo -->.*?<!-- /seo -->', '', head, flags=re.S)
     head = re.sub(r'\n?<meta (?:property="og:(?:url|type|site_name|locale)"|name="twitter:card")[^>]*>', '', head)
     # only our own images move with the site address; images hosted elsewhere (e.g. play.afl) stay put
-    head = re.sub(r'(<meta property="og:image" content=")https?://(?:www\.unswesbulldogs\.com\.au|[a-z0-9-]+\.clubshed\.app)', r'\1' + SITE, head)
+    head = re.sub(r'(<meta property="og:image" content=")https?://(?:www\.unswesbulldogs\.com\.au|[a-z0-9-]+\.clubshed\.app|easternsuburbsbulldogs\.github\.io)', r'\1' + SITE, head)
 
     block = ['<!-- seo -->']
     if is_404 or PREVIEW:
@@ -92,7 +92,7 @@ for f in sorted(pub.rglob('*.html')):
         block.append('<meta property="og:locale" content="en_AU">')
         block.append('<meta name="twitter:card" content="summary_large_image">')
     block.append('<meta name="theme-color" content="%s">' % THEME)
-    block.append('<link rel="apple-touch-icon" href="%sapp-icon.png">' % prefix)
+    block.append('<link rel="apple-touch-icon" href="/apple-touch-icon.png">')
     if rel == 'index.html':
         block.append('<script type="application/ld+json">%s</script>' % json.dumps(ORG, ensure_ascii=False))
     elif is_news and not is_tpl:
