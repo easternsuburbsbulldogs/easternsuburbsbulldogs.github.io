@@ -1,21 +1,113 @@
 {
-  "updated": "2026-11-18T10:13:13.440Z",
+  "updated": "2026-11-26T06:16:23.212Z",
   "items": [
+    {
+      "title": "SFL set for interstate showdown against Perth Football League",
+      "summary": "The best players of the Sydney Football League (SFL) will take on the best of the Perth Football League (PFL) in a Representative AFL double-header in Perth next year",
+      "date": "2026-11-23",
+      "url": "https://play.afl/nswact/news/sfl-set-interstate-showdown-against-perth-football-league",
+      "image": "/playafl/22c6c1dcd0c5.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-sfl-set-for-interstate-showdown-against-perth-football-leagu"
+    },
+    {
+      "title": "East Coast Eagles become Western GIANTS ahead of inaugural SFL season",
+      "summary": "The East Coast Eagles will enter the inaugural Sydney Football League (SFL) season in 2027 as the Western GIANTS, marking a bold evolution for the foundation club",
+      "date": "2026-11-23",
+      "url": "https://play.afl/nswact/news/east-coast-eagles-become-western-giants-ahead-inaugural-sfl-season",
+      "image": "/playafl/9b04deccaad7.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-east-coast-eagles-become-western-giants-ahead-of-inaugural-s"
+    },
+    {
+      "title": "Henson Park's 2027 AAMI Community Series fixtures confirmed",
+      "summary": "The AFL has confirmed the fixture for the 2027 AAMI Community Series, with two games to be played at Henson Park in Sydney's Inner West",
+      "date": "2026-11-20",
+      "url": "https://play.afl/nswact/news/henson-parks-2027-aami-community-series-fixtures-confirmed",
+      "image": "/playafl/8537dcdef265.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-henson-parks-2027-aami-community-series-fixtures-confirmed"
+    },
     {
       "title": "Williamson to lead UNSW-ES into 2027",
       "summary": "Tom Williamson will continue as UNSW-ES Women’s SFL head coach in 2027",
       "date": "2026-11-10",
       "url": "https://play.afl/nswact/sfl/news/williamson-lead-unsw-es-2027",
-      "image": "https://play.afl/sites/default/files/2026-11/Tom%20Williamson_0.jpg",
-      "source": "Play AFL"
+      "image": "/playafl/0ce87fe4fa5a.webp",
+      "source": "Play AFL",
+      "page": "/news/williamson-womens-coach-2027"
     },
     {
       "title": "DUAL PREMIERSHIP SWAN JOINS BULLDOGS",
       "summary": "Swans great Ryan O’Keefe joins UNSW-ES as Director of Coaching",
       "date": "2026-10-28",
       "url": "https://play.afl/nswact/sfl/news/dual-premiership-swan-joins-bulldogs",
-      "image": "https://play.afl/sites/default/files/2026-10/Ryan%20O%27Keefe%20appointment.png",
-      "source": "Play AFL"
+      "image": "/playafl/92b6dbf29982.webp",
+      "source": "Play AFL",
+      "page": "/news/ryan-okeefe-director-of-coaching"
+    },
+    {
+      "title": "SFL partner with Premier Data ahead of inaugural 2027 season",
+      "summary": "Premier Data has been announced as the Official Statistics, App and Performance Analysis partner of the Sydney Football League ahead of its inaugural season in 2027",
+      "date": "2026-10-20",
+      "url": "https://play.afl/nswact/news/sfl-partner-premier-data-ahead-inaugural-2027-season",
+      "image": "/playafl/31ceb5f07cd0.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-sfl-partner-with-premier-data-ahead-of-inaugural-2027-season"
+    },
+    {
+      "title": "Swans smash AFLW home crowd attendance record in 2026",
+      "summary": "The Sydney Swans have recorded its highest-ever AFLW home attendance in one season, with 33,844 supporters flocking to Swans AFLW games in 2026",
+      "date": "2026-10-20",
+      "url": "https://play.afl/nswact/news/swans-smash-aflw-home-crowd-attendance-record-2026",
+      "image": "/playafl/326b3aa519fa.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-swans-smash-aflw-home-crowd-attendance-record-in-2026"
+    },
+    {
+      "title": "NSW/ACT draft hopefuls arrive in Melbourne for Draft Combine",
+      "summary": "The 2026 Telstra AFL Draft Combine and 2026 Telstra AFLW Draft Combine will be hosted in Melbourne this week, bringing together the top prospects in this year’s Draft pools",
+      "date": "2026-09-28",
+      "url": "https://play.afl/nswact/news/nswact-draft-hopefuls-arrive-melbourne-draft-combine",
+      "image": "/playafl/144c5fca3a8a.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-nsw-act-draft-hopefuls-arrive-in-melbourne-for-draft-combine"
+    },
+    {
+      "title": "2026 AFL Sydney Phelan & Mostyn Medallists awarded",
+      "summary": "The South West Sydney Blues’ Luke Parkinson and the North Shore Bombers’ Lucy Yates have claimed the Phelan and Mostyn Medals respectively for the 2026 AFL Sydney season",
+      "date": "2026-09-14",
+      "url": "https://play.afl/nswact/news/2026-afl-sydney-phelan-mostyn-medallists-awarded",
+      "image": "/playafl/077031504f57.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-2026-afl-sydney-phelan-mostyn-medallists-awarded"
+    },
+    {
+      "title": "AFL Sydney product Rampe named stand-in Sydney Swans skipper",
+      "summary": "Sydney Swans defender and AFL Sydney product Dane Rampe will lead the team for the remainder of the 2026 season, having today been named as the stand-in captain for Callum Mills",
+      "date": "2026-09-14",
+      "url": "https://play.afl/nswact/news/afl-sydney-product-rampe-named-stand-sydney-swans-skipper",
+      "image": "/playafl/7c961a2a25e2.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-afl-sydney-product-rampe-named-stand-in-sydney-swans-skipper"
+    },
+    {
+      "title": "Swans Soar in front of record crowd at Sydney Derby V",
+      "summary": "More than 7,340 fans packed Henson Park for the Sydney Derby as the Swans claimed bragging-rights over the GIANTS",
+      "date": "2026-09-13",
+      "url": "https://play.afl/nswact/news/swans-soar-front-record-crowd-sydney-derby-v",
+      "image": "/playafl/78cac9100422.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-swans-soar-in-front-of-record-crowd-at-sydney-derby-v"
+    },
+    {
+      "title": "Goals Galore in Dramatic Final Round Shoot-out",
+      "summary": "Trent Dennis-Lane booted seventeen goals in the Wolves demolition of Inner West Magpies",
+      "date": "2026-08-30",
+      "url": "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out",
+      "image": "/playafl/fc449483189a.webp",
+      "source": "Play AFL",
+      "page": "/news/playafl-goals-galore-in-dramatic-final-round-shoot-out"
     }
   ]
 }

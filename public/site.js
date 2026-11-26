@@ -121,64 +121,44 @@
     paint();
   }
 
-  /* NEWS: blend in Play AFL articles about the club.
-     Our own articles always win. Each club article gets a HEAD_START (21 days) added to its date
-     when ranking, so a Play AFL story only gets ahead of ours if it is three weeks newer. At most
-     MAX_PLAYAFL of the visible cards come from Play AFL, a Play AFL story that matches one of ours
-     (similar headline) is dropped, and anything older than MAX_AGE days is ignored. If the feed
-     can't be reached, the page keeps its own cards as written. */
-  var NEWS = { SLOTS: 4, MAX_PLAYAFL: 2, HEAD_START: 21, MAX_AGE: 120 };
-  function words(t) {
-    return (t || '').toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(function (w) {
-      return w.length > 3 && ['with', 'from', 'into', '2026', '2027', 'unsw', 'bulldogs', 'club'].indexOf(w) < 0;
-    });
-  }
-  function similar(a, b) {
-    var A = words(a), B = words(b), hit = 0;
-    A.forEach(function (w) { if (B.indexOf(w) >= 0) hit++; });
-    return hit / Math.max(1, Math.min(A.length, B.length)) >= 0.5;
-  }
+  /* NEWS: the home page shows the newest club articles. Hand-written cards are in the page; stories brought in
+     from Play AFL by the scheduled job (tools/playafl_articles.py) get their own club page and are listed in
+     news.json. Everything is sorted by date and the newest NEWS_SLOTS are shown. If news.json can't be read,
+     the page keeps its own cards as written. */
+  var NEWS_SLOTS = 4;
   function fmtDate(iso) {
     var d = new Date(iso + 'T00:00:00Z');
     return d.getUTCDate() + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getUTCMonth()] + ' ' + d.getUTCFullYear();
   }
-  function playAflCard(it) {
-    var a = el('article', 'ncard ext');
-    a.innerHTML = '<div class="band"></div><div class="thumb"></div><div class="body"><div class="meta"><span class="pill">Play AFL</span><span class="date"></span></div><h3></h3><p></p><a class="more" target="_blank" rel="noopener">Read on Play AFL ↗</a></div>';
+  function storyCard(it) {
+    var a = el('article', 'ncard navy');
+    a.innerHTML = '<div class="band"></div><div class="thumb"></div><div class="body"><div class="meta"><span class="pill">Club news</span><span class="date"></span></div><h3></h3><p></p><a class="more">Read more →</a></div>';
     if (it.image) {
       var img = el('img'); img.src = it.image; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
       a.querySelector('.thumb').appendChild(img);
     }
     a.querySelector('.date').textContent = fmtDate(it.date);
-    a.querySelector('h3').textContent = it.title;
+    var t = it.title === it.title.toUpperCase() ? it.title.toLowerCase().replace(/\w/g, function (c) { return c.toUpperCase(); }) : it.title;
+    a.querySelector('h3').textContent = t;
     a.querySelector('p').textContent = it.summary;
-    a.querySelector('.more').href = it.url;
+    a.querySelector('.more').href = it.page;
     return a;
   }
   function blendNews() {
     var grid = document.querySelector('#news .news');
     if (!grid || !window.fetch) return;
-    var DAY = 864e5, now = Date.now();
     fetch('/news.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
-      if (!data || !data.items || !data.items.length) return;
+      if (!data || !data.items) return;
       var ours = [].map.call(grid.querySelectorAll('.ncard[data-date]'), function (c) {
-        var t = Date.parse(c.getAttribute('data-date'));
-        return { el: c, title: c.querySelector('h3').textContent, source: c.getAttribute('data-source'), score: t + NEWS.HEAD_START * DAY, club: true };
+        var link = c.querySelector('a.more');
+        return { el: c, date: c.getAttribute('data-date'), source: c.getAttribute('data-source'), page: link ? link.getAttribute('href').replace(/\.html$/, '') : '' };
       });
-      var theirs = data.items.filter(function (it) {
-        var t = Date.parse(it.date);
-        return it.date && now - t < NEWS.MAX_AGE * DAY && !ours.some(function (o) { return o.source === it.url || similar(o.title, it.title); });
-      }).map(function (it) { return { item: it, score: Date.parse(it.date), club: false }; });
-      var all = ours.concat(theirs).sort(function (x, y) { return y.score - x.score; });
-      var pick = [], ext = 0;
-      all.forEach(function (c) {
-        if (pick.length >= NEWS.SLOTS) return;
-        if (!c.club && ext >= NEWS.MAX_PLAYAFL) return;
-        if (!c.club) ext++;
-        pick.push(c);
-      });
+      var extra = data.items.filter(function (it) {
+        return it.page && it.date && !ours.some(function (o) { return o.source === it.url || ('/' + o.page) === it.page || o.page === it.page; });
+      }).map(function (it) { return { item: it, date: it.date }; });
+      var all = ours.concat(extra).sort(function (x, y) { return y.date < x.date ? -1 : y.date > x.date ? 1 : 0; }).slice(0, NEWS_SLOTS);
       grid.textContent = '';
-      pick.forEach(function (c) { grid.appendChild(c.club ? c.el : playAflCard(c.item)); });
+      all.forEach(function (c) { grid.appendChild(c.el || storyCard(c.item)); });
     }).catch(function () {});
   }
 
@@ -242,22 +222,6 @@
       t.style.setProperty('--dur', (n * 12) + 's');
     });
     blendNews();
-    // News page: list Play AFL stories we haven't written up ourselves.
-    var pl = document.getElementById('playafl-list');
-    if (pl && window.fetch) {
-      fetch('/news.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
-        if (!d || !d.items) return;
-        var have = [].map.call(document.querySelectorAll('.ncard'), function (c) {
-          return { source: c.getAttribute('data-source'), title: (c.querySelector('h3') || {}).textContent };
-        });
-        var grid = pl.querySelector('.news'), n = 0;
-        d.items.forEach(function (it) {
-          if (have.some(function (h) { return h.source === it.url || similar(h.title, it.title); })) return;
-          grid.appendChild(playAflCard(it)); n++;
-        });
-        if (n) pl.hidden = false;
-      }).catch(function () {});
-    }
     if (SHOW_SWITCHER) buildSwitcher();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance); else enhance();

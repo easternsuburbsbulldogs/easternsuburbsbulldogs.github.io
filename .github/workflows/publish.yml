@@ -23,6 +23,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # to save new club pages made from Play AFL stories back to the repo
     steps:
       - uses: actions/checkout@v7
 
@@ -41,6 +43,22 @@ jobs:
         run: |
           pip install --quiet pillow
           python tools/playafl_images.py public/news.json public/playafl
+
+      - name: Make club news pages for new Play AFL stories and list them
+        run: |
+          python tools/playafl_articles.py public
+          python tools/news_index.py public
+          python tools/seo.py public https://www.unswesbulldogs.com.au
+
+      - name: Save new club pages to the repo (only when there are new ones)
+        run: |
+          if [ -n "$(git status --porcelain -- public/news/)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/news public/playafl public/sitemap.xml
+            git commit -m "Add club news from Play AFL"
+            git pull --rebase --autostash && git push
+          fi
 
       - name: Leave out files that are not part of the public site
         run: rm -f public/news/_template.html

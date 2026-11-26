@@ -1010,8 +1010,8 @@
   #partners .morelink{margin-top:22px}
   @media(max-width:860px){#partners .majorsp{flex-wrap:wrap;gap:12px 18px;padding:18px}#partners .majorsp img{height:56px}}
   /* two light sections in a row: don't double the gap */
-  #join,#story{padding-top:36px}
-  @media(max-width:640px){#join,#story{padding-top:20px}}
+  #story{padding-top:36px}
+  @media(max-width:640px){#story{padding-top:20px}}
   @media(max-width:560px){#partners .plogos.p6{grid-template-columns:repeat(3,1fr);gap:10px}#partners .plogo.img{height:78px;padding:10px}#partners .plogo.img img{max-height:50px}}
 
   /* footer social icons */
@@ -1088,4 +1088,12 @@
   .ig-embed{position:relative;aspect-ratio:3/2}
   .ig-embed iframe{position:absolute;left:0;top:-158px;width:100%;height:calc(100% + 158px + 80px)!important;border:0}
   @media(max-width:860px){.ig-embed iframe{height:calc(100% + 158px + 80px)!important}}
-  #social{padding-top:36px}
+  /* Bulldog Socials sits on the dark band: lift the cards off it */
+  #social .ig-embed,#social .follow-card{border-color:rgba(255,255,255,.14);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+  #social .fc-head{background:rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.1)}
+  #social .follow-card{background:var(--navy2)}
+  #social .follow-row{color:#fff;border-color:rgba(255,255,255,.1)}
+  #social .follow-row:hover{background:rgba(255,255,255,.06)}
+  #social .fr-txt small{color:#AFC0DF}
+  #social .fr-txt em{color:#C9D3EC}
+  #social .fr-go{border-color:rgba(255,255,255,.25);color:#fff}

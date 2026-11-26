@@ -36,17 +36,47 @@ function mentionsClub(n) {
   return STRONG.test(text) || (BULLDOGS.test(text) && (n.news_article_url || '').includes('/nswact/'));
 }
 
+// The feed only has a headline and a one-line summary, so NSW/ACT stories that didn't match are opened and
+// their full text checked too (e.g. a fixture or match report that names UNSW-ES further down).
+async function bodyMentionsClub(path) {
+  try {
+    const r = await fetch('https://play.afl' + path, { headers: { accept: 'text/html', 'user-agent': 'unswes-bulldogs-website' } });
+    if (!r.ok) return false;
+    let html = await r.text();
+    const main = html.match(/<main[\s\S]*?<\/main>/i);          // the article itself, not menus or footers
+    const text = (main ? main[0] : html).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(NOT_US, '');
+    return STRONG.test(text) || BULLDOGS.test(text);
+  } catch { return false; }
+}
+
 const pages = await Promise.all(FEEDS.flatMap(feed => Array.from({ length: PAGES }, (_, i) =>
   fetch(feed + i, { headers: { accept: 'application/json', 'user-agent': 'unswes-bulldogs-website' } })
     .then(r => (r.ok ? r.json() : null)).catch(() => null))));
 
 const seen = new Set();
-const items = [];
+const all = [];
 for (const p of pages) {
   for (const n of (p && p.data && p.data.news) || []) {
     const url = 'https://play.afl' + (n.news_article_url || '');
-    if (!n.news_article_url || seen.has(url) || !mentionsClub(n)) continue;
+    if (!n.news_article_url || seen.has(url)) continue;
     seen.add(url);
+    all.push(n);
+  }
+}
+// headline/summary first; then the full text of NSW/ACT stories, a few at a time
+const keep = new Set(all.filter(mentionsClub));
+const toCheck = all.filter(n => !keep.has(n) && (n.news_article_url || '').includes('/nswact/'));
+for (let i = 0; i < toCheck.length; i += 5) {
+  const batch = toCheck.slice(i, i + 5);
+  const hits = await Promise.all(batch.map(n => bodyMentionsClub(n.news_article_url)));
+  batch.forEach((n, j) => { if (hits[j]) keep.add(n); });
+}
+const items = [];
+for (const n of all) {
+  {
+    if (!keep.has(n)) continue;
+    const url = 'https://play.afl' + n.news_article_url;
     items.push({
       title: (n.news_tile_heading || '').trim(),
       summary: (n.news_summary || '').trim(),
@@ -60,4 +90,4 @@ for (const p of pages) {
 
 items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), items }, null, 2) + '\n');
-console.log(`wrote ${items.length} Play AFL stories to ${OUT}` + (pages.some(Boolean) ? '' : ' (feeds unreachable)'));
+console.log(`checked ${all.length} stories (${toCheck.length} full texts); wrote ${items.length} to ${OUT}` + (pages.some(Boolean) ? '' : ' (feeds unreachable)'));
