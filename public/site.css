@@ -1082,3 +1082,10 @@
   [data-theme="lights"] .follow-row:hover{background:#18223A}
   [data-theme="lights"] .fr-txt em{color:#C3CBDD}
   [data-theme="lights"] .fr-go{border-color:#2E3A60}
+
+  /* Instagram embed cropped to just the six posts: the embed has a fixed 158px header, then a 3x2 grid of
+     square tiles a third of its width each, so a 3:2 window shifted up 158px shows exactly the posts */
+  .ig-embed{position:relative;aspect-ratio:3/2}
+  .ig-embed iframe{position:absolute;left:0;top:-158px;width:100%;height:calc(100% + 158px + 80px)!important;border:0}
+  @media(max-width:860px){.ig-embed iframe{height:calc(100% + 158px + 80px)!important}}
+  #partners{padding-top:36px}
