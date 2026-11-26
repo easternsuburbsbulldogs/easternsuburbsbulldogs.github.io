@@ -43,8 +43,9 @@ After running any of the `tools/` scripts, commit the changed files in `public/`
 
 ## Play AFL news
 
-Every hour GitHub Actions runs `tools/fetch-playafl-news.mjs`, which reads the AFL Sydney / SFL news feed,
-keeps stories that mention the club, shrinks each story's picture to a small WebP copy on our own site (`tools/playafl_images.py`), and publishes them as `news.json`. The home page and the News page
+Every few hours GitHub Actions runs `tools/fetch-playafl-news.mjs`, which reads three Play AFL feeds (AFL Sydney / SFL,
+NSW/ACT, and unfiltered), keeps stories that mention UNSW, UNSW-ES, Eastern Suburbs, East Sydney or Henson Park
+(or "Bulldogs" in NSW/ACT stories), shrinks each story's picture to a small WebP copy on our own site (`tools/playafl_images.py`), and publishes them as `news.json`. The home page and the News page
 blend these in with the club's own articles. Club articles always take priority, and a Play AFL story that
 we have written up ourselves never shows twice. If Play AFL is down, the site simply shows the club's own
 articles. You can see each run under the **Actions** tab, and start one by hand with **Run workflow**.
@@ -66,3 +67,9 @@ public/          the website itself (HTML, site.css, site.js, images, fonts)
 tools/           small scripts that rebuild parts of the pages from simple lists
 .github/         the publish-and-news workflow
 ```
+
+## Social media
+
+The home page's **Follow the Bulldogs** section shows Instagram's own embed of @unswesafl (it loads straight from
+Instagram in the visitor's browser, so it is always current and needs no setup), next to a follow card for
+Instagram, Facebook and TikTok. The links live in `public/index.html` (search for `follow-row`).
