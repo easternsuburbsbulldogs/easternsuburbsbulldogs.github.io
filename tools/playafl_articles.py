@@ -42,11 +42,33 @@ def nice_title(t):
     return t.title() if t.isupper() else t
 
 
+# remove generated pages for stories that were looked at this run but no longer qualify
+kept = {it['url'] for it in data.get('items', [])}
+removed = 0
+for url in data.get('checked', []):
+    name = covered.get(url)
+    if url in kept or not name:
+        continue
+    f = news_dir / name
+    if 'generated from Play AFL' in f.read_text(encoding='utf-8'):
+        f.unlink()
+        del covered[url]
+        removed += 1
+if removed:
+    print(f'removed {removed} pages for stories that no longer qualify')
+
 made = 0
 for it in data.get('items', []):
     url = it['url']
     if url in covered:
         it['page'] = '/news/' + covered[url][:-5]
+        # keep the tag on generated pages up to date (hand-written pages are left alone)
+        f = news_dir / covered[url]
+        t = f.read_text(encoding='utf-8')
+        if 'generated from Play AFL' in t:
+            t2 = re.sub(r'<span class="pill navy">[^<]*</span>', f'<span class="pill navy">{html.escape(it.get("tag") or "Club news")}</span>', t, count=1)
+            if t2 != t:
+                f.write_text(t2, encoding='utf-8', newline='\n')
         continue
     if not it.get('date'):
         continue
@@ -71,7 +93,7 @@ for it in data.get('items', []):
     main = f'''<main class="art">
   <!-- generated from Play AFL by tools/playafl_articles.py; safe to edit by hand -->
   <a class="back" href="../index.html#news">← All news</a>
-  <div class="meta"><span class="pill navy">Club news</span><span class="date">{long_date(it['date'])}</span></div>
+  <div class="meta"><span class="pill navy">{html.escape(it.get('tag') or 'Club news')}</span><span class="date">{long_date(it['date'])}</span></div>
   <h1>{title}</h1>
   <p class="lede">{summary}</p>{hero}
   <div class="body">

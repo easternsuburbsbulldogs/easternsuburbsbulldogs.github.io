@@ -36,6 +36,20 @@ function mentionsClub(n) {
   return STRONG.test(text) || (BULLDOGS.test(text) && (n.news_article_url || '').includes('/nswact/'));
 }
 
+// In full article text, a club name sitting in a list of other clubs ("Sydney University, UNSW Eastern
+// Suburbs Bulldogs, UTS Bats, ...") is just the SFL line-up, not a story about us. A mention only counts if
+// fewer than two other club names sit right around it. Henson Park mentions always count.
+const OTHER_CLUBS = /Sydney University|UTS|St\.? George|Pennant Hills|North Shore|Manly|East Coast|Eagles|Giants|GIANTS|Inner West|Wests|West Sydney|Blues|Dragons|Bats|Demons|Wolves|Southern Power|Magpies|Swans Academy/g;
+function realMention(text) {
+  if (/\bhenson park\b/i.test(text)) return true;
+  const re = new RegExp(`${STRONG.source}|${BULLDOGS.source}`, 'gi');
+  for (const m of text.matchAll(re)) {
+    const around = text.slice(Math.max(0, m.index - 90), m.index + m[0].length + 90);
+    if ((around.match(OTHER_CLUBS) || []).length < 2) return true;
+  }
+  return false;
+}
+
 // The feed only has a headline and a one-line summary, so NSW/ACT stories that didn't match are opened and
 // their full text checked too (e.g. a fixture or match report that names UNSW-ES further down).
 async function bodyMentionsClub(path) {
@@ -46,7 +60,7 @@ async function bodyMentionsClub(path) {
     const main = html.match(/<main[\s\S]*?<\/main>/i);          // the article itself, not menus or footers
     const text = (main ? main[0] : html).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ')
       .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(NOT_US, '');
-    return STRONG.test(text) || BULLDOGS.test(text);
+    return realMention(text) ? text : false;
   } catch { return false; }
 }
 
@@ -66,11 +80,17 @@ for (const p of pages) {
 }
 // headline/summary first; then the full text of NSW/ACT stories, a few at a time
 const keep = new Set(all.filter(mentionsClub));
+const bodyText = new Map();
 const toCheck = all.filter(n => !keep.has(n) && (n.news_article_url || '').includes('/nswact/'));
 for (let i = 0; i < toCheck.length; i += 5) {
   const batch = toCheck.slice(i, i + 5);
   const hits = await Promise.all(batch.map(n => bodyMentionsClub(n.news_article_url)));
-  batch.forEach((n, j) => { if (hits[j]) keep.add(n); });
+  batch.forEach((n, j) => { if (hits[j]) { keep.add(n); bodyText.set(n, hits[j]); } });
+}
+const CLUB = /\b(unsw[- ]?es|unsw|eastern suburbs|east sydney|bulldogs)\b/i;
+function tagFor(n) {
+  const text = (bodyText.get(n) || `${n.news_tile_heading || ''} ${n.news_summary || ''}`).replace(NOT_US, '');
+  return /\bhenson park\b/i.test(text) && !CLUB.test(text) ? 'Henson Park' : 'Club news';
 }
 const items = [];
 for (const n of all) {
@@ -84,10 +104,13 @@ for (const n of all) {
       url,
       image: /^https:\/\/play\.afl\//.test(n.news_article_image || '') ? n.news_article_image : null,
       source: 'Play AFL',
+      tag: tagFor(n),
     });
   }
 }
 
 items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), items }, null, 2) + '\n');
+// every story looked at this run, so pages made earlier for stories that no longer qualify can be removed
+const checked = all.map(n => 'https://play.afl' + n.news_article_url);
+writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), items, checked }, null, 2) + '\n');
 console.log(`checked ${all.length} stories (${toCheck.length} full texts); wrote ${items.length} to ${OUT}` + (pages.some(Boolean) ? '' : ' (feeds unreachable)'));

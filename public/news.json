@@ -1,24 +1,6 @@
 {
-  "updated": "2026-11-26T06:16:23.212Z",
+  "updated": "2026-11-26T06:24:09.967Z",
   "items": [
-    {
-      "title": "SFL set for interstate showdown against Perth Football League",
-      "summary": "The best players of the Sydney Football League (SFL) will take on the best of the Perth Football League (PFL) in a Representative AFL double-header in Perth next year",
-      "date": "2026-11-23",
-      "url": "https://play.afl/nswact/news/sfl-set-interstate-showdown-against-perth-football-league",
-      "image": "/playafl/22c6c1dcd0c5.webp",
-      "source": "Play AFL",
-      "page": "/news/playafl-sfl-set-for-interstate-showdown-against-perth-football-leagu"
-    },
-    {
-      "title": "East Coast Eagles become Western GIANTS ahead of inaugural SFL season",
-      "summary": "The East Coast Eagles will enter the inaugural Sydney Football League (SFL) season in 2027 as the Western GIANTS, marking a bold evolution for the foundation club",
-      "date": "2026-11-23",
-      "url": "https://play.afl/nswact/news/east-coast-eagles-become-western-giants-ahead-inaugural-sfl-season",
-      "image": "/playafl/9b04deccaad7.webp",
-      "source": "Play AFL",
-      "page": "/news/playafl-east-coast-eagles-become-western-giants-ahead-of-inaugural-s"
-    },
     {
       "title": "Henson Park's 2027 AAMI Community Series fixtures confirmed",
       "summary": "The AFL has confirmed the fixture for the 2027 AAMI Community Series, with two games to be played at Henson Park in Sydney's Inner West",
@@ -26,6 +8,7 @@
       "url": "https://play.afl/nswact/news/henson-parks-2027-aami-community-series-fixtures-confirmed",
       "image": "/playafl/8537dcdef265.webp",
       "source": "Play AFL",
+      "tag": "Henson Park",
       "page": "/news/playafl-henson-parks-2027-aami-community-series-fixtures-confirmed"
     },
     {
@@ -35,6 +18,7 @@
       "url": "https://play.afl/nswact/sfl/news/williamson-lead-unsw-es-2027",
       "image": "/playafl/0ce87fe4fa5a.webp",
       "source": "Play AFL",
+      "tag": "Club news",
       "page": "/news/williamson-womens-coach-2027"
     },
     {
@@ -44,16 +28,8 @@
       "url": "https://play.afl/nswact/sfl/news/dual-premiership-swan-joins-bulldogs",
       "image": "/playafl/92b6dbf29982.webp",
       "source": "Play AFL",
+      "tag": "Club news",
       "page": "/news/ryan-okeefe-director-of-coaching"
-    },
-    {
-      "title": "SFL partner with Premier Data ahead of inaugural 2027 season",
-      "summary": "Premier Data has been announced as the Official Statistics, App and Performance Analysis partner of the Sydney Football League ahead of its inaugural season in 2027",
-      "date": "2026-10-20",
-      "url": "https://play.afl/nswact/news/sfl-partner-premier-data-ahead-inaugural-2027-season",
-      "image": "/playafl/31ceb5f07cd0.webp",
-      "source": "Play AFL",
-      "page": "/news/playafl-sfl-partner-with-premier-data-ahead-of-inaugural-2027-season"
     },
     {
       "title": "Swans smash AFLW home crowd attendance record in 2026",
@@ -62,16 +38,8 @@
       "url": "https://play.afl/nswact/news/swans-smash-aflw-home-crowd-attendance-record-2026",
       "image": "/playafl/326b3aa519fa.webp",
       "source": "Play AFL",
+      "tag": "Henson Park",
       "page": "/news/playafl-swans-smash-aflw-home-crowd-attendance-record-in-2026"
-    },
-    {
-      "title": "NSW/ACT draft hopefuls arrive in Melbourne for Draft Combine",
-      "summary": "The 2026 Telstra AFL Draft Combine and 2026 Telstra AFLW Draft Combine will be hosted in Melbourne this week, bringing together the top prospects in this year’s Draft pools",
-      "date": "2026-09-28",
-      "url": "https://play.afl/nswact/news/nswact-draft-hopefuls-arrive-melbourne-draft-combine",
-      "image": "/playafl/144c5fca3a8a.webp",
-      "source": "Play AFL",
-      "page": "/news/playafl-nsw-act-draft-hopefuls-arrive-in-melbourne-for-draft-combine"
     },
     {
       "title": "2026 AFL Sydney Phelan & Mostyn Medallists awarded",
@@ -80,6 +48,7 @@
       "url": "https://play.afl/nswact/news/2026-afl-sydney-phelan-mostyn-medallists-awarded",
       "image": "/playafl/077031504f57.webp",
       "source": "Play AFL",
+      "tag": "Club news",
       "page": "/news/playafl-2026-afl-sydney-phelan-mostyn-medallists-awarded"
     },
     {
@@ -89,6 +58,7 @@
       "url": "https://play.afl/nswact/news/afl-sydney-product-rampe-named-stand-sydney-swans-skipper",
       "image": "/playafl/7c961a2a25e2.webp",
       "source": "Play AFL",
+      "tag": "Club news",
       "page": "/news/playafl-afl-sydney-product-rampe-named-stand-in-sydney-swans-skipper"
     },
     {
@@ -98,6 +68,7 @@
       "url": "https://play.afl/nswact/news/swans-soar-front-record-crowd-sydney-derby-v",
       "image": "/playafl/78cac9100422.webp",
       "source": "Play AFL",
+      "tag": "Henson Park",
       "page": "/news/playafl-swans-soar-in-front-of-record-crowd-at-sydney-derby-v"
     },
     {
@@ -107,7 +78,99 @@
       "url": "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out",
       "image": "/playafl/fc449483189a.webp",
       "source": "Play AFL",
+      "tag": "Club news",
       "page": "/news/playafl-goals-galore-in-dramatic-final-round-shoot-out"
     }
+  ],
+  "checked": [
+    "https://play.afl/nswact/news/nswact-rams-return-headlines-2027-representative-afl-calendar",
+    "https://play.afl/nswact/news/sfl-set-interstate-showdown-against-perth-football-league",
+    "https://play.afl/nswact/news/east-coast-eagles-become-western-giants-ahead-inaugural-sfl-season",
+    "https://play.afl/news/afl-sydney-coaching-vacancies-2027",
+    "https://play.afl/nswact/sfl/news/blakemore-lead-pennant-hills-inaugural-sfl-season",
+    "https://play.afl/nswact/sfl/news/williamson-lead-unsw-es-2027",
+    "https://play.afl/nswact/news/afl-announces-round-2-nsw-facilities-fund-recipients",
+    "https://play.afl/nswact/sfl/news/bats-name-rugg-womens-coach",
+    "https://play.afl/nswact/sfl/news/kenny-returns-st-george",
+    "https://play.afl/news/afl-sydney-centenary-of-the-phelan-medal-book",
+    "https://play.afl/nswact/sfl/news/dual-premiership-swan-joins-bulldogs",
+    "https://play.afl/nswact/news/sfl-partner-premier-data-ahead-inaugural-2027-season",
+    "https://play.afl/nswact/news/afl-sydney-umpire-emma-waters-elevated-aflw-list",
+    "https://play.afl/nswact/news/nswact-draft-hopefuls-arrive-melbourne-draft-combine",
+    "https://play.afl/news/afl-sydney-grand-finals-week-four-preview",
+    "https://play.afl/news/afl-sydney-podcast-episode-28-grand-final-preview",
+    "https://play.afl/news/afl-sydney-premier-division-finals-week-four-preview",
+    "https://play.afl/nswact/news/grand-finalists-meet-ahead-afl-sydney-premier-division-deciders",
+    "https://play.afl/nswact/news/2026-afl-sydney-phelan-mostyn-medallists-awarded",
+    "https://play.afl/nswact/news/afl-sydney-product-rampe-named-stand-sydney-swans-skipper",
+    "https://play.afl/news/phelan-medallist-pocket-profile-stephen-wray",
+    "https://play.afl/news/afl-sydney-finals-series-2026-week-three",
+    "https://play.afl/news/afl-sydney-podcast-episode-27-road-to-glory-narrows",
+    "https://play.afl/news/afl-sydney-premier-division-finals-week-three-preview",
+    "https://play.afl/news/phelan-medallist-pocket-profile-jarrod-crosby",
+    "https://play.afl/news/finals-week-2-2026-review-afl-sydney",
+    "https://play.afl/news/phelan-medallist-pocket-profile-mark-mackenzie",
+    "https://play.afl/news/afl-sydney-finals-series-2026-week-two",
+    "https://play.afl/news/afl-sydney-podcast-episode-26-finals-series-underway",
+    "https://play.afl/news/afl-sydney-premier-division-finals-week-two-preview",
+    "https://play.afl/news/phelan-medallist-pocket-profile-stephen-pech",
+    "https://play.afl/nswact/news/applications-open-round-2-afl-new-south-wales-facilities-fund",
+    "https://play.afl/news/finals-week-one-2026-review-afl-sydney",
+    "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out",
+    "https://play.afl/news/phelan-medallist-pocket-profile-jack-dimery",
+    "https://play.afl/news/afl-sydney-finals-series-week-one-2026",
+    "https://play.afl/nswact/news/afl-unveils-robertson-oval-upgrades-giants-hit-track-wagga",
+    "https://play.afl/nswact/news/meet-recruits-drafted-nswact-2026-telstra-afl-draft",
+    "https://play.afl/nswact/news/henson-parks-2027-aami-community-series-fixtures-confirmed",
+    "https://play.afl/nswact/news/afl-invests-200k-strengthen-grassroots-canberras-north",
+    "https://play.afl/nswact/news/your-guide-giants-training-and-community-camp-wagga",
+    "https://play.afl/nswact/news/afl-club-membership-all-time-record",
+    "https://play.afl/nswact/news/sydney-swans-claim-2026-mcclelland-trophy",
+    "https://play.afl/nswact/news/matt-connell-commences-afl-riverina",
+    "https://play.afl/nswact/news/nsw-umpire-harrison-hansford-elevated-afl-list-2027",
+    "https://play.afl/nswact/news/giants-and-swans-aflw-stars-nominated-jim-stynes-award",
+    "https://play.afl/nswact/news/giants-sharpest-minds-open-playbook-riverina-coaches",
+    "https://play.afl/nswact/news/dane-rampe-calls-time",
+    "https://play.afl/news/2027-afl-national-academy-squads-selected",
+    "https://play.afl/nswact/news/2027-afl-round-1-fixture-announced-season-open-scg",
+    "https://play.afl/nswact/news/swans-announce-new-executive-gm-aflw-football",
+    "https://play.afl/nswact/news/swans-smash-aflw-home-crowd-attendance-record-2026",
+    "https://play.afl/nswact/news/nswact-rams-cap-strong-campaign-2026-toyota-afl-open",
+    "https://play.afl/nswact/news/giants-return-wagga-wagga-training-and-community-camp",
+    "https://play.afl/nswact/news/one-week-go-until-team-nswact-takes-2026-toyota-afl-open",
+    "https://play.afl/nswact/news/2026-paul-kelly-cup-state-champions-crowned",
+    "https://play.afl/nswact/news/nsws-homegrown-umpires-named-grand-final-umpiring-panel",
+    "https://play.afl/nswact/news/mudgee-mustangs-gallop-afl-central-west",
+    "https://play.afl/nswact/news/tickets-how-watch-sydney-swans-v-fremantle-preliminary-final",
+    "https://play.afl/nswact/news/janissen-named-nswacts-2026-aflw-community-ambassador",
+    "https://play.afl/nswact/news/swans-soar-front-record-crowd-sydney-derby-v",
+    "https://play.afl/nswact/news/afl-launches-inaugural-indigenous-and-multicultural-futures-program",
+    "https://play.afl/victoria/news/11-vics-named-aflw-all-australian-team",
+    "https://play.afl/nswact/aflcanberra/news/AFL-Canberra-to-take-on-NSW-Country-in-2027",
+    "https://play.afl/victoria/news/jordyn-allen-named-2026-telstra-aflw-rising-star",
+    "https://play.afl/queensland/news/queenslands-best-unite-2027-state-showdown",
+    "https://play.afl/victoria/news/finalists-2026-best-community-football-facilities-project",
+    "https://play.afl/news/joint-statement-strong-regions-strong-clubs",
+    "https://play.afl/news/committee-appointed-2027-aflnt-hall-fame-nominations-open",
+    "https://play.afl/news/cazalys-nt-talent-academy-unveils-2027-under-18-girls-squad",
+    "https://play.afl/victoria/news/danyel-waters-wins-state-prize-bhp-community-coach-year",
+    "https://play.afl/victoria/news/prespakis-make-best-and-fairest-history1",
+    "https://play.afl/news/territory-proud-sonny-smiler-earns-his-afl-opportunity",
+    "https://play.afl/queensland/news/meet-afl-cape-york-2026-graduates",
+    "https://play.afl/queensland/news/afl-queensland-innovation-among-six-qsport-award-nominations",
+    "https://play.afl/news/lulu-pullar-wins-2026-aflw-jim-stynes-community-leadership-award",
+    "https://play.afl/news/rachael-anstey-named-2026-bhp-aflw-community-coach-year",
+    "https://play.afl/victoria/news/37-victorians-selected-2026-telstra-afl-draft",
+    "https://play.afl/news/round-8-preview-202627-tio-ntfl-mens-premier-league",
+    "https://play.afl/news/heat-policy-implemented-tio-ntfl-round-8-matches",
+    "https://play.afl/news/round-8-preview-202627-tio-ntfl-womens-premier-league",
+    "https://play.afl/queensland/news/caylenmurraydraft",
+    "https://play.afl/news/cazalys-nt-talent-academy-reveals-2027-under-18-boys-squad",
+    "https://play.afl/queensland/news/movement-across-our-qfa-and-qfaw-competitions-2027",
+    "https://play.afl/news/celebrating-territory-football-aflnt-hall-fame-return-2027",
+    "https://play.afl/tasmania/news/2027-tasmanian-football-hall-fame-tickets-sale-now",
+    "https://play.afl/victoria/news/afl-victoria-backs-future-regional-football",
+    "https://play.afl/news/cazalys-nt-talent-academy-take-afl-cairns-double-header",
+    "https://play.afl/queensland/news/new-era-afl-queensland-schools-excellence-program"
   ]
 }

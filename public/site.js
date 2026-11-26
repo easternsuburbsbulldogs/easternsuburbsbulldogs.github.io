@@ -137,8 +137,9 @@
       var img = el('img'); img.src = it.image; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
       a.querySelector('.thumb').appendChild(img);
     }
+    a.querySelector('.pill').textContent = it.tag || 'Club news';
     a.querySelector('.date').textContent = fmtDate(it.date);
-    var t = it.title === it.title.toUpperCase() ? it.title.toLowerCase().replace(/\w/g, function (c) { return c.toUpperCase(); }) : it.title;
+    var t = it.title === it.title.toUpperCase() ? it.title.toLowerCase().replace(/\b\w/g, function (c) { return c.toUpperCase(); }) : it.title;
     a.querySelector('h3').textContent = t;
     a.querySelector('p').textContent = it.summary;
     a.querySelector('.more').href = it.page;
