@@ -1088,4 +1088,4 @@
   .ig-embed{position:relative;aspect-ratio:3/2}
   .ig-embed iframe{position:absolute;left:0;top:-158px;width:100%;height:calc(100% + 158px + 80px)!important;border:0}
   @media(max-width:860px){.ig-embed iframe{height:calc(100% + 158px + 80px)!important}}
-  #partners{padding-top:36px}
+  #social{padding-top:36px}
