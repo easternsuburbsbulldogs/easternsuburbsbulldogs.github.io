@@ -1049,3 +1049,18 @@
     .burger{display:flex;width:44px;height:44px;align-items:center;justify-content:center;margin-right:-8px}
   }
   .brand b,.navcta{white-space:nowrap}
+
+  /* SOCIAL: Instagram embed + follow buttons */
+  .social-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+  .ig-embed{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .ig-embed iframe{display:block;width:100%;height:640px;border:0}
+  .soc-list{display:grid;gap:12px}
+  .soc-btn{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--navy);color:#fff;border-radius:6px;transition:background-color .15s}
+  .soc-btn:hover{background:var(--navy3)}
+  .soc-btn svg{flex:0 0 26px;width:26px;height:26px;fill:currentColor}
+  .soc-btn b{display:block;font:600 16px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
+  .soc-btn small{display:block;font-size:13px;color:#C9D3EC;margin-top:1px}
+  #partners{padding-top:36px}
+  @media(max-width:860px){.social-grid{grid-template-columns:1fr}.ig-embed iframe{height:560px}.soc-list{grid-template-columns:repeat(3,1fr)}.soc-btn{flex-direction:column;text-align:center;gap:8px;padding:14px 8px}.soc-btn small{display:none}}
+  [data-theme="lights"] .ig-embed{border-color:#232C45}
+  [data-theme="lights"] .soc-btn{background:#161F38;border:1px solid #232C45}
