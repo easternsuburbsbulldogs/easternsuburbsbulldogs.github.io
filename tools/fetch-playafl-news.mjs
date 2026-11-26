@@ -1,15 +1,26 @@
-// Fetches AFL Sydney / SFL news from Play AFL, keeps the stories that mention the club,
+// Fetches news from Play AFL, keeps the stories that mention the club or its grounds,
 // and writes them to a JSON file the website reads (public/news.json).
-// Runs automatically every hour in GitHub Actions (.github/workflows/publish.yml).
+// Runs on a schedule in GitHub Actions (.github/workflows/publish.yml).
 // Run by hand with:  node tools/fetch-playafl-news.mjs public/news.json
 import { writeFileSync } from 'node:fs';
 
 const OUT = process.argv[2] || 'public/news.json';
-const FEED = 'https://play.afl/news/search?tags=734%2C415&page=';
-const PAGES = 3; // about 30 recent stories
 
-// Match the club, but not "Western Bulldogs" on its own.
-const KEYWORDS = /\b(unsw[- ]?es|unsw|eastern suburbs|east sydney|bulldogs)\b/i;
+// Play AFL files stories in different places, and no single feed has them all:
+//   - the AFL Sydney / SFL tag feed has club stories (e.g. coaching appointments),
+//   - the NSW/ACT feed (play.afl/article/nswact) has local stories such as Henson Park fixtures,
+//   - the unfiltered feed catches anything else. All three are read and merged.
+const FEEDS = [
+  'https://play.afl/news/search?tags=734%2C415&page=',
+  'https://play.afl/news/search?programme=nswact&page=',
+  'https://play.afl/news/search?page=',
+];
+const PAGES = 3; // per feed, about 30 recent stories each
+
+// Words that mean the story is about us wherever it appears...
+const STRONG = /\b(unsw[- ]?es|unsw|eastern suburbs|east sydney|henson park)\b/i;
+// ...and "Bulldogs" on its own, which only counts for NSW/ACT stories: nationally it usually means the Western Bulldogs.
+const BULLDOGS = /\bbulldogs\b/i;
 const NOT_US = /\bwestern bulldogs\b/gi;
 const MONTHS = { january: 0, february: 1, march: 2, april: 3, may: 4, june: 5, july: 6, august: 7, september: 8, october: 9, november: 10, december: 11 };
 
@@ -20,11 +31,14 @@ function parseDate(s) {
   return new Date(Date.UTC(+m[3], MONTHS[m[2].toLowerCase()], +m[1])).toISOString().slice(0, 10);
 }
 
-const mentionsClub = n => KEYWORDS.test(`${n.news_tile_heading || ''} ${n.news_summary || ''}`.replace(NOT_US, ''));
+function mentionsClub(n) {
+  const text = `${n.news_tile_heading || ''} ${n.news_summary || ''}`.replace(NOT_US, '');
+  return STRONG.test(text) || (BULLDOGS.test(text) && (n.news_article_url || '').includes('/nswact/'));
+}
 
-const pages = await Promise.all(Array.from({ length: PAGES }, (_, i) =>
-  fetch(FEED + i, { headers: { accept: 'application/json', 'user-agent': 'unswes-bulldogs-website' } })
-    .then(r => (r.ok ? r.json() : null)).catch(() => null)));
+const pages = await Promise.all(FEEDS.flatMap(feed => Array.from({ length: PAGES }, (_, i) =>
+  fetch(feed + i, { headers: { accept: 'application/json', 'user-agent': 'unswes-bulldogs-website' } })
+    .then(r => (r.ok ? r.json() : null)).catch(() => null))));
 
 const seen = new Set();
 const items = [];
@@ -44,5 +58,6 @@ for (const p of pages) {
   }
 }
 
+items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), items }, null, 2) + '\n');
-console.log(`wrote ${items.length} Play AFL stories to ${OUT}` + (pages.some(Boolean) ? '' : ' (feed unreachable)'));
+console.log(`wrote ${items.length} Play AFL stories to ${OUT}` + (pages.some(Boolean) ? '' : ' (feeds unreachable)'));

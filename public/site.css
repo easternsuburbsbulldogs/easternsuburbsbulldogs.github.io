@@ -1050,17 +1050,35 @@
   }
   .brand b,.navcta{white-space:nowrap}
 
-  /* SOCIAL: Instagram embed + follow buttons */
-  .social-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
-  .ig-embed{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  /* SOCIAL: Instagram's profile embed + follow card */
+  .social-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
+  .ig-embed{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
   .ig-embed iframe{display:block;width:100%;height:640px;border:0}
-  .soc-list{display:grid;gap:12px}
-  .soc-btn{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--navy);color:#fff;border-radius:6px;transition:background-color .15s}
-  .soc-btn:hover{background:var(--navy3)}
-  .soc-btn svg{flex:0 0 26px;width:26px;height:26px;fill:currentColor}
-  .soc-btn b{display:block;font:600 16px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.05em}
-  .soc-btn small{display:block;font-size:13px;color:#C9D3EC;margin-top:1px}
-  #partners{padding-top:36px}
-  @media(max-width:860px){.social-grid{grid-template-columns:1fr}.ig-embed iframe{height:560px}.soc-list{grid-template-columns:repeat(3,1fr)}.soc-btn{flex-direction:column;text-align:center;gap:8px;padding:14px 8px}.soc-btn small{display:none}}
-  [data-theme="lights"] .ig-embed{border-color:#232C45}
-  [data-theme="lights"] .soc-btn{background:#161F38;border:1px solid #232C45}
+  .follow-card{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;position:sticky;top:96px}
+  .fc-head{display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--navy);color:#fff}
+  .fc-head img{width:58px;height:auto}
+  .fc-head small{display:block;font:500 11px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.14em;color:var(--gold2)}
+  .fc-head b{display:block;font:600 22px Oswald,sans-serif;letter-spacing:.02em;margin-top:2px}
+  .follow-row{display:flex;align-items:center;gap:14px;padding:16px 20px;border-top:1px solid var(--line);color:var(--ink);transition:background-color .18s}
+  .fc-head+.follow-row{border-top:0}
+  .follow-row:hover{background:#F4F6FA}
+  .fr-ic{flex:0 0 44px;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 12px rgba(6,10,30,.12)}
+  .fr-ic svg{width:22px;height:22px;fill:currentColor}
+  .fr-ic.ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+  .fr-ic.fb{background:#1877F2}
+  .fr-ic.tt{background:#010101;color:#fff;filter:drop-shadow(1.5px 1.5px 0 #FE2C55) drop-shadow(-1px -1px 0 #25F4EE)}
+  .fr-txt{flex:1;min-width:0}
+  .fr-txt b{display:block;font:600 15px Oswald,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+  .fr-txt small{display:block;font-size:12.5px;color:var(--mut);margin-top:1px}
+  .fr-txt em{display:block;font-style:normal;font-size:13px;color:#4a5670;margin-top:5px;line-height:1.4}
+  .fr-go{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--red);transition:transform .2s,background-color .2s,border-color .2s,color .2s}
+  .fr-go svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .follow-row:hover .fr-go{transform:translateX(3px);background:var(--red);border-color:var(--red);color:#fff}
+  @media(max-width:860px){.social-grid{grid-template-columns:1fr}.ig-embed iframe{height:560px}.follow-card{position:static}}
+  @media(prefers-reduced-motion:reduce){.follow-row:hover .fr-go{transform:none}}
+  [data-theme="lights"] .ig-embed,[data-theme="lights"] .follow-card{border-color:#232C45}
+  [data-theme="lights"] .follow-card{background:#121A2E}
+  [data-theme="lights"] .follow-row{color:var(--ink);border-color:#232C45}
+  [data-theme="lights"] .follow-row:hover{background:#18223A}
+  [data-theme="lights"] .fr-txt em{color:#C3CBDD}
+  [data-theme="lights"] .fr-go{border-color:#2E3A60}
