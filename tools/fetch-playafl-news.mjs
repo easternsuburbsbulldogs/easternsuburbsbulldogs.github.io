@@ -90,7 +90,7 @@ for (let i = 0; i < toCheck.length; i += 5) {
 const CLUB = /\b(unsw[- ]?es|unsw|eastern suburbs|east sydney|bulldogs)\b/i;
 function tagFor(n) {
   const text = (bodyText.get(n) || `${n.news_tile_heading || ''} ${n.news_summary || ''}`).replace(NOT_US, '');
-  return /\bhenson park\b/i.test(text) && !CLUB.test(text) ? 'Henson Park' : 'Club news';
+  return /\bhenson park\b/i.test(text) && !CLUB.test(text) ? 'Henson' : 'Club news';
 }
 const items = [];
 for (const n of all) {

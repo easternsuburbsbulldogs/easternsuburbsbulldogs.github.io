@@ -127,4 +127,15 @@ sm += ['  <url><loc>%s</loc><lastmod>%s</lastmod></url>' % (u, today) for u in p
 sm.append('</urlset>')
 (pub / 'sitemap.xml').write_text('\n'.join(sm) + '\n', encoding='utf-8', newline='\n')
 (pub / 'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n' % SITE, encoding='utf-8', newline='\n')
+# Version stamp on the stylesheet and script links, so browsers pick up changes straight away
+# instead of using a cached copy for a few minutes.
+import hashlib
+for asset in ('site.css', 'site.js'):
+    version = hashlib.sha1((pub / asset).read_bytes()).hexdigest()[:8]
+    pattern = re.compile('((?:href|src)="[^"]*' + re.escape(asset) + ')(?:[?]v=[0-9a-f]+)?"')
+    for f in sorted(pub.rglob('*.html')):
+        t = f.read_text(encoding='utf-8')
+        t2 = pattern.sub(lambda m: m.group(1) + '?v=' + version + '"', t)
+        if t2 != t:
+            f.write_text(t2, encoding='utf-8', newline=chr(10))
 print('stamped %d pages for %s' % (len(pages), SITE))
