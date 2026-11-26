@@ -68,6 +68,13 @@ tools/           small scripts that rebuild parts of the pages from simple lists
 .github/         the publish-and-news workflow
 ```
 
+### Stopping a story from showing
+
+Some stories mention the club only in passing (say, a match report that lists our score). To hide one, open
+`tools/news-ignore.txt` on GitHub, click the pencil, paste the story's Play AFL link on a new line, and commit.
+On the next run the story, and the club page made for it, disappear. A one-word note on the line above helps
+the next person know why.
+
 ## Social media
 
 The home page's **Follow the Bulldogs** section shows Instagram's own embed of @unswesafl (it loads straight from

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T06:29:28.306Z",
+  "updated": "2026-11-26T06:32:07.740Z",
   "items": [
     {
       "title": "Henson Park's 2027 AAMI Community Series fixtures confirmed",
@@ -70,16 +70,6 @@
       "source": "Play AFL",
       "tag": "Henson",
       "page": "/news/playafl-swans-soar-in-front-of-record-crowd-at-sydney-derby-v"
-    },
-    {
-      "title": "Goals Galore in Dramatic Final Round Shoot-out",
-      "summary": "Trent Dennis-Lane booted seventeen goals in the Wolves demolition of Inner West Magpies",
-      "date": "2026-08-30",
-      "url": "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out",
-      "image": "/playafl/fc449483189a.webp",
-      "source": "Play AFL",
-      "tag": "Club news",
-      "page": "/news/playafl-goals-galore-in-dramatic-final-round-shoot-out"
     }
   ],
   "checked": [
@@ -116,7 +106,6 @@
     "https://play.afl/news/phelan-medallist-pocket-profile-stephen-pech",
     "https://play.afl/nswact/news/applications-open-round-2-afl-new-south-wales-facilities-fund",
     "https://play.afl/news/finals-week-one-2026-review-afl-sydney",
-    "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out",
     "https://play.afl/news/phelan-medallist-pocket-profile-jack-dimery",
     "https://play.afl/news/afl-sydney-finals-series-week-one-2026",
     "https://play.afl/nswact/news/afl-unveils-robertson-oval-upgrades-giants-hit-track-wagga",
@@ -171,6 +160,7 @@
     "https://play.afl/tasmania/news/2027-tasmanian-football-hall-fame-tickets-sale-now",
     "https://play.afl/victoria/news/afl-victoria-backs-future-regional-football",
     "https://play.afl/news/cazalys-nt-talent-academy-take-afl-cairns-double-header",
-    "https://play.afl/queensland/news/new-era-afl-queensland-schools-excellence-program"
+    "https://play.afl/queensland/news/new-era-afl-queensland-schools-excellence-program",
+    "https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out"
   ]
 }

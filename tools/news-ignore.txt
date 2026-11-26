@@ -1,0 +1,6 @@
+# Play AFL stories that should never appear on the club website.
+# Paste one Play AFL link per line, save, and commit. The story (and any page made for it) disappears
+# on the next run. Lines starting with # are notes.
+
+# History piece: mentions East Sydney only as part of goalkicking records
+https://play.afl/nswact/news/goals-galore-dramatic-final-round-shoot-out

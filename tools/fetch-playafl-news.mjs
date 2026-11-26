@@ -2,9 +2,10 @@
 // and writes them to a JSON file the website reads (public/news.json).
 // Runs on a schedule in GitHub Actions (.github/workflows/publish.yml).
 // Run by hand with:  node tools/fetch-playafl-news.mjs public/news.json
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 
 const OUT = process.argv[2] || 'public/news.json';
+const IGNORE_FILE = new URL('./news-ignore.txt', import.meta.url);
 
 // Play AFL files stories in different places, and no single feed has them all:
 //   - the AFL Sydney / SFL tag feed has club stories (e.g. coaching appointments),
@@ -40,9 +41,12 @@ function mentionsClub(n) {
 // Suburbs Bulldogs, UTS Bats, ...") is just the SFL line-up, not a story about us. A mention only counts if
 // fewer than two other club names sit right around it. Henson Park mentions always count.
 const OTHER_CLUBS = /Sydney University|UTS|St\.? George|Pennant Hills|North Shore|Manly|East Coast|Eagles|Giants|GIANTS|Inner West|Wests|West Sydney|Blues|Dragons|Bats|Demons|Wolves|Southern Power|Magpies|Swans Academy/g;
+// Inside article text only the club's current names count. "East Sydney" and "Eastern Suburbs" on their own
+// are old club names or just the region, so in a story's body they usually mean history, not news about us.
+const CURRENT_NAMES = /\b(unsw[- ]?es|unsw|bulldogs)\b/gi;
 function realMention(text) {
   if (/\bhenson park\b/i.test(text)) return true;
-  const re = new RegExp(`${STRONG.source}|${BULLDOGS.source}`, 'gi');
+  const re = CURRENT_NAMES;
   for (const m of text.matchAll(re)) {
     const around = text.slice(Math.max(0, m.index - 90), m.index + m[0].length + 90);
     if ((around.match(OTHER_CLUBS) || []).length < 2) return true;
@@ -79,6 +83,14 @@ for (const p of pages) {
   }
 }
 // headline/summary first; then the full text of NSW/ACT stories, a few at a time
+// Stories listed in tools/news-ignore.txt (one Play AFL link per line) are never shown.
+const ignored = new Set((existsSync(IGNORE_FILE) ? readFileSync(IGNORE_FILE, 'utf8') : '').split(/\r?\n/)
+  .map(l => l.trim().replace(/[?#].*$/, '').replace(/\/$/, '')).filter(l => l && !l.startsWith('#')));
+const droppedByList = [];
+for (let i = all.length - 1; i >= 0; i--) {
+  const u = 'https://play.afl' + all[i].news_article_url;
+  if (ignored.has(u.replace(/\/$/, ''))) { droppedByList.push(u); all.splice(i, 1); }
+}
 const keep = new Set(all.filter(mentionsClub));
 const bodyText = new Map();
 const toCheck = all.filter(n => !keep.has(n) && (n.news_article_url || '').includes('/nswact/'));
@@ -111,6 +123,6 @@ for (const n of all) {
 
 items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 // every story looked at this run, so pages made earlier for stories that no longer qualify can be removed
-const checked = all.map(n => 'https://play.afl' + n.news_article_url);
+const checked = all.map(n => 'https://play.afl' + n.news_article_url).concat(droppedByList);
 writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), items, checked }, null, 2) + '\n');
 console.log(`checked ${all.length} stories (${toCheck.length} full texts); wrote ${items.length} to ${OUT}` + (pages.some(Boolean) ? '' : ' (feeds unreachable)'));
